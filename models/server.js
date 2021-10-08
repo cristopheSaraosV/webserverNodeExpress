@@ -7,24 +7,26 @@ class Server {
 		this.port = process.env.PORT;
 
 	
-	
+
+		// Middleware
+		this.middlewares();
+		
+		
+
         // Other Routes
         this.app.get('*', (req, res)=> {
             res.sendFile(path.resolve(__dirname,'../public/index.html'))
         })        
 	}
 
-	async connectDB (){
-		await dbConnection();
-	}
-
+	
 	middlewares() {
 		this.app.use(cors());
 		this.app.use(express.static('public'));
 		this.app.use(express.json());
 	}
 
-
+	
 
 	listen() {
 		this.app.listen(this.port, () => {
